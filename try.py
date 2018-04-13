@@ -1,18 +1,13 @@
-import os
-from nltk.parse import stanford
-os.environ['STANFORD_PARSER'] = '/Users/vaishrohan/Downloads/stanford-parser-full-2018-02-27/stanford-parser.jar'
-os.environ['STANFORD_MODELS'] = '/Users/vaishrohan/Downloads/stanford-parser-full-2018-02-27/stanford-parser-3.9.1-models.jar'
+from stanfordcorenlp import StanfordCoreNLP
+import config
 
-parser = stanford.StanfordParser(model_path="/Users/vaishrohan/Downloads/stanford-parser-full-2018-02-27/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz")
-sentences = parser.raw_parse_sents(("Hello, My name is Melroy.", "What is your Empire State?"))
-print sentences
+nlp = StanfordCoreNLP(config.path)
 
-for line in sentences:
-	for sentence in line:
-		print sentence
+sentence = 'Guangdong University of Foreign Studies is located in Guangzhou.'
+print 'Tokenize:', nlp.word_tokenize(sentence)
+print 'Part of Speech:', nlp.pos_tag(sentence)
+print 'Named Entities:', nlp.ner(sentence)
+print 'Constituency Parsing:', nlp.parse(sentence)
+print 'Dependency Parsing:', nlp.dependency_parse(sentence)
 
-
-from nltk.tag import StanfordNERTagger
-st = StanfordNERTagger('/Users/vaishrohan/Downloads/stanford-ner-2018-02-27/classifiers/english.conll.4class.distsim.crf.ser.gz') 
-print (st.tag('Rami Eid is studying at Stony Brook University in NY'.split()))
-print 'hey'
+nlp.close()
