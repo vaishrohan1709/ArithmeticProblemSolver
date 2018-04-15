@@ -9,7 +9,9 @@ def main():
         for question in questions:
             pass
             # Simplify problem
+        # For quick testing of parser code
         word_problem = parser.parse(questions[5])
+        print word_problem
 
 
 if __name__ == '__main__':
