@@ -27,7 +27,8 @@ def parse(question):
     # Tokenize each segment
     left_segment_tokens = nlp.word_tokenize(left_segment)
     right_segment_tokens = nlp.word_tokenize(right_segment)
-    print isVerb(left_segment, nlp)
+    #print isVerb(left_segment_tokens, nlp)
+    print(isVerb("I am running", nlp))
 
 
 def isVerb(segment, nlp):
@@ -36,23 +37,22 @@ def isVerb(segment, nlp):
     :param nlp: stanfordcorenlp engine
     :return: truth value of verb presence in phrase
     """
-    # Check if the left segment contains verbs
-    '''
-    pos = ' '
     index = 1
-    for token in tokens:
-        pos = nlp.pos_tag(token)
-        if 'VB' in pos and tokens.index(token) != 0:
-            # Check if token before is a word level to
-            tk = tokens.index(token) - 1
-            if 'TO' not in nlp.word_tokenize(tk) and index < len(tokens) and not isVerb(tokens[index:len(tokens-1)], nlp):
-                return True
-        elif 'VB' in pos and tokens.index(token) == 0:
-            if len(tokens) > 1:
-                return True
-            if len(tokens) > 1 and len(tokens) > index:
-                if not isVerb(tokens[index:len(tokens-1)], nlp):
+    for word in segment.split():
+        if str(nlp.pos_tag(word)[0][1]).find('VB') != -1 and segment.index(word) != 0:
+            if not str(segment[segment.index(word) - 1]).find('TO') != 1 and index < len(segment):
+                if not isVerb(segment[index:len(segment) - 1], nlp):
                     return True
+        if str(nlp.pos_tag(word)[0][1]).find('VB') and segment.index(word) == 0:
+            if len(segment) > 1 and index< len(segment) and not isVerb(segment[index:len(segment) - 1], nlp):
+                return True
+            if len(segment) == 1:
+                return True
+        index += 1
     return False
-    '''
-    return nlp.pos_tag(segment)
+
+
+
+
+
+
