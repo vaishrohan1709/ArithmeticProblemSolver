@@ -27,8 +27,8 @@ def parse(question):
     # Tokenize each segment
     left_segment_tokens = nlp.word_tokenize(left_segment)
     right_segment_tokens = nlp.word_tokenize(right_segment)
-    #print isVerb(left_segment_tokens, nlp)
-    print(isVerb("I am running", nlp))
+    print isVerb(left_segment_tokens, nlp)
+    #print(isVerb("I am running", nlp))
 
 
 def isVerb(segment, nlp):
@@ -38,7 +38,7 @@ def isVerb(segment, nlp):
     :return: truth value of verb presence in phrase
     """
     index = 1
-    for word in segment.split():
+    for word in segment:
         if str(nlp.pos_tag(word)[0][1]).find('VB') != -1 and segment.index(word) != 0:
             if not str(segment[segment.index(word) - 1]).find('TO') != 1 and index < len(segment):
                 if not isVerb(segment[index:len(segment) - 1], nlp):
