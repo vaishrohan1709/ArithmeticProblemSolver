@@ -27,7 +27,7 @@ def parse(question):
         if conj != ' ':
             # Perform splits left and right of the conjunction
             left_segment = sentence.split(conj)[0]
-            right_segment = sentence.split(conj)[1]
+            right_segment = sentence.split(conj)[1].lstrip()
 
             # Create a file config.py and and set path = to path to stanford-corenlp-full-2018-02-27
             nlp = StanfordCoreNLP(config.path, memory='8g')
@@ -36,14 +36,27 @@ def parse(question):
             left_segment_tokens = nlp.word_tokenize(left_segment)
             right_segment_tokens = nlp.word_tokenize(right_segment)
 
+            '''
             if not isVerb(left_segment, nlp):
                 return_sentence = return_sentence + sentence + ' '
                 continue
 
             # TODO: get verb phrase, is prep
+
             nlp.close()
-        else:
-            return_sentence = return_sentence + sentence + ' '
+            else:
+            print("Here")
+            '''
+
+            if isVerb(left_segment, nlp):
+                v1 = getVerbPhrase(left_segment, nlp)
+                left_entity = nlp.ner(left_segment.split(v1)[0])
+                if left_entity[0][1] == "TITLE" or left_entity[0][1] == "PERSON":
+                    p1 = left_entity[0][0]
+
+
+
+            nlp.close()
     return return_sentence
 
 
@@ -70,6 +83,11 @@ def isVerb(segment, nlp):
     return False
 
 
+def getVerbPhrase(segment, nlp):
+    for word in segment.split():
+        pos = nlp.pos_tag(word)[0]
+        if "VB" in pos[1]:
+            return pos[0]
 
 
 

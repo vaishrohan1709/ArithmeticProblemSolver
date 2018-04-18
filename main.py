@@ -10,7 +10,7 @@ def main():
             pass
             # Simplify problem
         # For quick testing of parser code
-        word_problem = parser.parse(questions[5])
+        word_problem = parser.parse("Sam had 49 pennies and 10 nickels in the bank")
         print word_problem
 
 
