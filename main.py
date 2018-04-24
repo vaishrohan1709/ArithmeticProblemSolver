@@ -13,6 +13,7 @@ def main():
         # For quick testing of parser code
         word_problem = parser.parse(questions[12])
         extracted_info = analyzer.extract(word_problem)
+        # TODO: associate entities with values
         print(word_problem)
 
 
