@@ -36,14 +36,16 @@ def parse(question):
             right_segment = sentence.split(conj)[1].lstrip()
 
             # Create a file config.py and and set path = to path to stanford-corenlp-full-2018-02-27
-            nlp = StanfordCoreNLP(config.path, memory='8g')
+            nlp = StanfordCoreNLP(config.path, memory='4g')
 
             if is_verb(left_segment, nlp):
-                v1 = get_verb_phrase(left_segment, nlp).rstrip()
-                entity = nlp.ner(left_segment.split(v1)[0])
+                verb_phrase = get_verb_phrase(left_segment, nlp).lstrip()
+                v1 = verb_phrase.split(" ", 1)[0]
+                p1 = left_segment[0: left_segment.index(v1)]
+                '''
                 if entity[0][1] == "TITLE" or entity[0][1] == "PERSON":
                     p1 = entity[0][0]
-
+                '''
                 if not is_verb(right_segment, nlp):
                     v2 = v1
                     p2 = p1
@@ -54,20 +56,19 @@ def parse(question):
                     if entity[0][1] == "TITLE" or entity[0][1] == "PERSON":
                         p2 = entity[0][0]
                 if is_prep(left_segment, nlp):
-                    prp1 = get_prep_phrase(left_segment, nlp)
+                    prp1 = get_prep_phrase(left_segment, nlp).lstrip()
                 if is_prep(right_segment, nlp):
                     prp2 = get_prep_phrase(right_segment, nlp)
                 if prp1 == '' and not prp2.startswith('for'):
-                    prp1 = prp2
-            elif not is_verb(left_segment, nlp):
-                pass
-            L2 = right_segment.replace(v2, "")
-            L2 = L2.replace(prp2, "")
+                    prp1 = prp2.lstrip()
 
-        print(left_segment)
-        print(L2)
-        print(v1, p1, v2, p2)
-        nlp.close()
+                resolved_left = p1 + verb_phrase + prp1
+                resolved_right = p2 + v1 + " " + right_segment
+                return_sentence = resolved_left + ". " + resolved_right
+            elif not is_verb(left_segment, nlp):
+                # TODO: is left segment does not have verb
+                pass
+            nlp.close()
     return return_sentence
 
 
@@ -106,12 +107,20 @@ def is_verb(segment, nlp):
     return False
 
 
-# TODO: Rewrite function to return verb phrase not just verb
 def get_verb_phrase(segment, nlp):
+    verb_phrase = ""
+    index = 0
     for word in segment.split():
-        pos = nlp.pos_tag(word)[0]
-        if pos[1].find("VB") != -1:
-            return pos[0]
+        tag = nlp.pos_tag(word)[0][1]
+        if index > 0:
+            if tag.find('VB') != -1 or tag.find("DT") != -1 or tag.find("NN") != -1 or tag.find("IN") != 1 \
+                    or tag.find("RB"):
+                verb_phrase = verb_phrase + word + " "
+                index += 1
+        if tag.find("VB") != -1:
+            verb_phrase = verb_phrase + word + " "
+            index += 1
+    return verb_phrase
 
 
 def is_prep(segment, nlp):
@@ -120,7 +129,6 @@ def is_prep(segment, nlp):
         if tag.find('IN') != -1 or tag.find('TO') != -1:
             return True
     return False
-
 
 
 def get_prep_phrase(segment, nlp):
