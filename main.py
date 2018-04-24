@@ -1,4 +1,5 @@
 import parser
+import analyzer
 
 
 # Step 1: Read questions from file
@@ -10,8 +11,10 @@ def main():
             pass
             # Simplify problem
         # For quick testing of parser code
-        word_problem = parser.parse("Sam had 49 pennies and 10 nickels in the bank")
+        word_problem = parser.parse(questions[12])
+        extracted_info = analyzer.extract(word_problem)
         print(word_problem)
+
 
 if __name__ == '__main__':
     main()

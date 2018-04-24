@@ -10,7 +10,6 @@ def parse(question):
 
     # Split question into constituent sentences
     sentences = tokenizer.tokenize(question)
-    print(sentences)
     return_sentence = ''
     v1 = ''
     v2 = ''
@@ -53,6 +52,7 @@ def parse(question):
                 else:
                     v2 = get_verb_phrase(right_segment, nlp)
                     entity = nlp.ner(right_segment.split(v1)[0])
+                    # TODO: Re do like left segment because it doesnt mention organizations
                     if entity[0][1] == "TITLE" or entity[0][1] == "PERSON":
                         p2 = entity[0][0]
                 if is_prep(left_segment, nlp):
@@ -62,12 +62,9 @@ def parse(question):
                 if prp1 == '' and not prp2.startswith('for'):
                     prp1 = prp2.lstrip()
 
-                resolved_left = p1 + verb_phrase + prp1
+                resolved_left = p1 + verb_phrase
                 resolved_right = p2 + v1 + " " + right_segment
                 return_sentence = resolved_left + ". " + resolved_right
-            elif not is_verb(left_segment, nlp):
-                # TODO: is left segment does not have verb
-                pass
             nlp.close()
     return return_sentence
 
