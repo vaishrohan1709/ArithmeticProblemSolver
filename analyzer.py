@@ -1,6 +1,7 @@
 from nltk.stem.wordnet import WordNetLemmatizer
 from stanfordcorenlp import StanfordCoreNLP
 import config
+from operator import itemgetter
 
 
 schema = {"put": "CHANGE_OUT", "plant": "CHANGE_OUT", "place": "CHANGE_OUT", "distribute": "CHANGE_OUT",
@@ -48,7 +49,21 @@ def extract(word_problem):
                     keyword = "more"
 
         # Get dependency parse for each sentence in question
-        parse = nlp.dependency_parse(sentence)
-        # first number represents source second number respresents destination of edge
-        # TODO: sort edge list
+        dependencies = nlp.dependency_parse(sentence)
+        # (relation, source, target)
+        dependencies = sorted(dependencies, key=itemgetter(1))
+        get_entities(sentence, dependencies, keyword, verb, tense, nlp)
+
+        # TODO: extract owners, entities and quantities
     nlp.close()
+
+
+def get_entities(sentence, dependencies, keyword, verb, tense, nlp):
+    print(dependencies)
+    for edge in dependencies:
+        # get dependency tag
+        relation = edge[0]
+        target = edge[2]
+        tag = nlp.pos_tag(sentence.split[int(target) - 1])
+        if tag.find("CD") != -1 and (relation.find("num") or relation.find("advcl")):
+            pass
