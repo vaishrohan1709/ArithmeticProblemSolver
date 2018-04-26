@@ -11,11 +11,9 @@ def main():
             pass
             # Simplify problem
         # For quick testing of parser code
-        print(parser.parse("Sam ate some bananas and ran across the river"))
-        print(parser.parse(questions[12]))
-        # extracted_info = analyzer.extract(word_problem)
+        word_problem = parser.parse(questions[12])
+        extracted_info = analyzer.extract(word_problem)
         # TODO: associate entities with values
-
 
 
 if __name__ == '__main__':

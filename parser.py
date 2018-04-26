@@ -1,7 +1,6 @@
 import config
 from stanfordcorenlp import StanfordCoreNLP
 import nltk
-import json
 
 
 def parse(question):
@@ -50,7 +49,6 @@ def parse(question):
 
                 else:
                     verb_phrase2 = get_verb_phrase(right_segment, nlp)
-                    # TODO: Re do like left segment because it doesnt mention organizations
                     v2 = verb_phrase2.split(" ", 1)[0]
                     p2 = right_segment[0: right_segment.index(v2)].lstrip()
 
@@ -62,12 +60,6 @@ def parse(question):
                 if p2 == '':
                     p2 = p1
 
-                print(p1, v1)
-                print(p2, v2)
-                print(verb_phrase)
-                print(verb_phrase2)
-                print(prp1, prp2)
-
                 resolved_left = p1 + " " + verb_phrase
 
                 if verb_phrase2 == '':
@@ -75,9 +67,10 @@ def parse(question):
                 else:
                     resolved_right = p2 + " " + v2 + " " + prp2
 
-                print(resolved_left + ". " + resolved_right)
-
+                return_sentence = resolved_left + ". " + resolved_right
             nlp.close()
+        else:
+            return_sentence = return_sentence + " " + sentence
     return return_sentence
 
 
