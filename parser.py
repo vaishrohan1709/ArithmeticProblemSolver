@@ -17,6 +17,8 @@ def parse(question):
     p2 = ''
     prp1 = ''
     prp2 = ''
+    verb_phrase2 = ''
+    verb_phrase = ''
     for sentence in sentences:
         conj = ' '
         # Switch on specific conjunctions from dataset
@@ -40,31 +42,41 @@ def parse(question):
             if is_verb(left_segment, nlp):
                 verb_phrase = get_verb_phrase(left_segment, nlp).lstrip()
                 v1 = verb_phrase.split(" ", 1)[0]
-                p1 = left_segment[0: left_segment.index(v1)]
-                '''
-                if entity[0][1] == "TITLE" or entity[0][1] == "PERSON":
-                    p1 = entity[0][0]
-                '''
+                p1 = left_segment[0: left_segment.index(v1)].rstrip()
+
                 if not is_verb(right_segment, nlp):
                     v2 = v1
                     p2 = p1
 
                 else:
-                    v2 = get_verb_phrase(right_segment, nlp)
-                    entity = nlp.ner(right_segment.split(v1)[0])
+                    verb_phrase2 = get_verb_phrase(right_segment, nlp)
                     # TODO: Re do like left segment because it doesnt mention organizations
-                    if entity[0][1] == "TITLE" or entity[0][1] == "PERSON":
-                        p2 = entity[0][0]
+                    v2 = verb_phrase2.split(" ", 1)[0]
+                    p2 = right_segment[0: right_segment.index(v2)].lstrip()
+
                 if is_prep(left_segment, nlp):
                     prp1 = get_prep_phrase(left_segment, nlp).lstrip()
                 if is_prep(right_segment, nlp):
                     prp2 = get_prep_phrase(right_segment, nlp)
-                if prp1 == '' and not prp2.startswith('for'):
-                    prp1 = prp2.lstrip()
 
-                resolved_left = p1 + verb_phrase
-                resolved_right = p2 + v1 + " " + right_segment
-                return_sentence = resolved_left + ". " + resolved_right
+                if p2 == '':
+                    p2 = p1
+
+                print(p1, v1)
+                print(p2, v2)
+                print(verb_phrase)
+                print(verb_phrase2)
+                print(prp1, prp2)
+
+                resolved_left = p1 + " " + verb_phrase
+
+                if verb_phrase2 == '':
+                    resolved_right = p2 + " " + right_segment
+                else:
+                    resolved_right = p2 + " " + v2 + " " + prp2
+
+                print(resolved_left + ". " + resolved_right)
+
             nlp.close()
     return return_sentence
 
