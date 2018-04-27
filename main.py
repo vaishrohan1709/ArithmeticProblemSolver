@@ -11,7 +11,9 @@ def main():
             pass
             # Simplify problem
         # For quick testing of parser code
+        print(questions[12])
         word_problem = parser.parse(questions[12])
+        print(word_problem)
         extracted_info = analyzer.extract(word_problem)
         # TODO: associate entities with values
 

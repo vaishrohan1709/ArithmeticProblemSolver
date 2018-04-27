@@ -41,11 +41,13 @@ def parse(question):
             if is_verb(left_segment, nlp):
                 verb_phrase = get_verb_phrase(left_segment, nlp).lstrip()
                 v1 = verb_phrase.split(" ", 1)[0]
+                #print('v1=',v1)
                 p1 = left_segment[0: left_segment.index(v1)].rstrip()
 
                 if not is_verb(right_segment, nlp):
                     v2 = v1
                     p2 = p1
+                    #print('v2=', v2)
 
                 else:
                     verb_phrase2 = get_verb_phrase(right_segment, nlp)
@@ -62,8 +64,9 @@ def parse(question):
 
                 resolved_left = p1 + " " + verb_phrase
 
+                #CHANGE MADE added v2 to if condition
                 if verb_phrase2 == '':
-                    resolved_right = p2 + " " + right_segment
+                    resolved_right = p2 + " " + v2 + " " + right_segment
                 else:
                     resolved_right = p2 + " " + v2 + " " + prp2
 
