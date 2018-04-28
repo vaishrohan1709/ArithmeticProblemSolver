@@ -4,6 +4,11 @@ import config
 from operator import itemgetter
 
 
+class Entity:
+    name = ''
+    value = ''
+
+
 schema = {"put": "CHANGE_OUT", "plant": "CHANGE_OUT", "place": "CHANGE_OUT", "distribute": "CHANGE_OUT",
           "transfer": "REDUCTION", "sell": "CHANGE_OUT", "give": "CHANGE_OUT", "add": "CHANGE_OUT",
           "more than": "COMPARE_PLUS", "get": "CHANGE_IN", "carry": "INCREASE", "buy": "CHANGE_IN",
@@ -21,7 +26,7 @@ def extract(word_problem):
     keyword = ''
     word_problem = word_problem.split(' . ')
     # Create a file config.py and and set path = to path to stanford-corenlp-full-2018-02-27
-    nlp = StanfordCoreNLP(config.path, memory='4g')
+    nlp = StanfordCoreNLP(config.path, memory='8g')
     for sentence in word_problem:
         for word in sentence.split():
             tag = nlp.pos_tag(word)[0][1]
@@ -38,6 +43,10 @@ def extract(word_problem):
                     tense = "past"
                 elif tense == '' and tag.find("VB") != -1:
                     tense = "present"
+
+            #change made to include less than
+            if stem == "less":
+                keyword = "less than"
             if stem in schema:
                 if not stem == "more" and stem == verb and not stem == "take":
                     keyword = stem
@@ -49,6 +58,7 @@ def extract(word_problem):
                     keyword = "more"
 
         # Get dependency parse for each sentence in question
+
         dependencies = nlp.dependency_parse(sentence)
         # (relation, source, target)
         dependencies = sorted(dependencies, key=itemgetter(1))
@@ -58,12 +68,28 @@ def extract(word_problem):
     nlp.close()
 
 
+
 def get_entities(sentence, dependencies, keyword, verb, tense, nlp):
+    print('sentence: ', sentence)
     print(dependencies)
     for edge in dependencies:
         # get dependency tag
         relation = edge[0]
         target = edge[2]
-        tag = nlp.pos_tag(sentence.split[int(target) - 1])
-        if tag.find("CD") != -1 and (relation.find("num") or relation.find("advcl")):
+        source = edge[1]
+        print('dependency:' , relation)
+        print('source word:', sentence.split()[int(source)-1])
+        print('target word:', sentence.split()[int(target)-1])
+        tag = nlp.pos_tag(sentence.split()[int(target)-1])
+        print('tag:', tag)
+        print('\n')
+        if tag=="CD" and (relation.find("num") or relation.find("advcl") or relation.find("nsubj") or relation.find("obj")):
             pass
+
+        newEntity = Entity()
+        newEntity.name = sentence.split()[int(source)-1]
+
+
+        print('entity name=',newEntity.name)
+
+
