@@ -61,19 +61,19 @@ def parse(question):
 
                 if p2 == '':
                     p2 = p1
-
                 resolved_left = p1 + " " + verb_phrase
-
-                #CHANGE MADE added v2 to if condition
+                # CHANGE MADE added v2 to if condition
                 if verb_phrase2 == '':
-                    resolved_right = p2 + " " + v2 + " " + right_segment
+                    resolved_right = p2.lstrip() + " " + v2 + " " + right_segment
                 else:
-                    resolved_right = p2 + " " + v2 + " " + prp2
+                    resolved_right = p2.lstrip() + " " + v2 + " " + prp2
 
                 return_sentence = resolved_left + ". " + resolved_right
+
             nlp.close()
         else:
             return_sentence = return_sentence + " " + sentence
+
     return return_sentence
 
 
