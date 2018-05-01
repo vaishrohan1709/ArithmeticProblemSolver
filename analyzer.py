@@ -31,6 +31,16 @@ def extract(word_problem):
     obj = ''
     stem = ''
     quantities = []
+    assumed_owner = ''
+
+    # Resolve pronouns
+    first_sentence = word_problem[0]
+    for word in first_sentence.split():
+        tag = nlp.pos_tag(word)[0][1]
+        if tag.find("NNP") != -1:
+            assumed_owner = word
+            break
+
     for sentence in word_problem[:-1]:
         owners = []
         parse = nlp.parse(sentence).encode('ascii', 'ignore')
@@ -67,5 +77,6 @@ def extract(word_problem):
             if tag.find('VB') != -1:
                 verbs.append(sentence.split()[int(dependency[2] - 1)])
         nouns.append(owners)
+
     return nouns, quantities, verbs, obj
 

@@ -25,7 +25,7 @@ def main():
     with open('data/q1.txt', 'r') as fi:
         questions = fi.readlines()
         # Step 2: Simplify the question by resolving conjunctions
-        word_problem = parser.parse("Rohan has 4 pencils . He lost 3 of them ")
+        word_problem = parser.parse("Rohan has 4 pencils . He lost 3 of them . How many pencils does Rohan .")
         print(word_problem)
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj = analyzer.extract(word_problem)
