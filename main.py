@@ -1,7 +1,9 @@
 import parser
 import analyzer
 import categorize
-
+from stanfordcorenlp import StanfordCoreNLP
+from solver import solve
+import config
 
 schema = {"serve": ""}
 
@@ -23,13 +25,18 @@ def main():
     with open('data/q1.txt', 'r') as fi:
         questions = fi.readlines()
         # Step 2: Simplify the question by resolving conjunctions
-        word_problem = parser.parse("Rohan has 4 pencils . Janice has 6 pencils . Rohan gave 2 pencils to Janice . How many pencils does Rohan have ?")
+        word_problem = parser.parse("Rohan has 4 pencils . He lost 3 of them ")
         print(word_problem)
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj = analyzer.extract(word_problem)
-        print(owners)
+
         # Step 4: categorize questions based on verb and schema and perform computations
         entities = categorize.assign(owners, verbs, quantities)
+
+        # Step 5: processing the question and answering it
+        answer_list = ''
+        answer_list = solve(word_problem,entities)
+        print(answer_list)
 
 
 if __name__ == '__main__':
