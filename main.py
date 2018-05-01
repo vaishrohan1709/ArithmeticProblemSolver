@@ -23,10 +23,11 @@ def main():
     with open('data/q1.txt', 'r') as fi:
         questions = fi.readlines()
         # Step 2: Simplify the question by resolving conjunctions
-        word_problem = parser.parse("Rohan has 4 pencils . Rohan gave 2 pencils to Janice . How many pencils does Rohan have ?")
+        word_problem = parser.parse("Rohan has 4 pencils . Janice has 6 pencils . Rohan gave 2 pencils to Janice . How many pencils does Rohan have ?")
         print(word_problem)
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj = analyzer.extract(word_problem)
+        print(owners)
         # Step 4: categorize questions based on verb and schema and perform computations
         entities = categorize.assign(owners, verbs, quantities)
 

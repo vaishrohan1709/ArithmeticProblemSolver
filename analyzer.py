@@ -58,13 +58,11 @@ def extract(word_problem):
 
             if dependency[0].encode('ascii', 'ignore') == 'nsubj' or dependency[0].encode('ascii', 'ignore') == 'iobj':
                 if tag.find("PRP") == -1:
-                    if not sentence.split()[int(dependency[2] - 1)] in owners:
-                        owners.append(sentence.split()[int(dependency[2] - 1)])
+                    owners.append(sentence.split()[int(dependency[2] - 1)])
 
-            if dependency[0].encode('ascii', 'ignore') == 'nmod':
+            elif dependency[0].encode('ascii', 'ignore') == 'nmod':
                 if tag.find("NNP") != -1:
-                    if not sentence.split()[int(dependency[2] - 1)] in nouns:
-                        owners.append(sentence.split()[int(dependency[2] - 1)])
+                    owners.append(sentence.split()[int(dependency[2] - 1)])
 
             if tag.find('VB') != -1:
                 verbs.append(sentence.split()[int(dependency[2] - 1)])
