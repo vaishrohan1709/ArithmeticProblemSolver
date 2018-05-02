@@ -5,20 +5,6 @@ from stanfordcorenlp import StanfordCoreNLP
 from solver import solve
 import config
 
-#schema = {"serve": ""}
-
-'''
-schema = {"put": "CHANGE_OUT", "plant": "CHANGE_OUT", "place": "CHANGE_OUT", "distribute": "CHANGE_OUT",
-          "transfer": "REDUCTION", "sell": "CHANGE_OUT", "give": "CHANGE_OUT", "add": "CHANGE_OUT",
-          "more than": "COMPARE_PLUS", "get": "CHANGE_IN", "carry": "INCREASE", "buy": "CHANGE_IN",
-          "take": "CHANGE_IN", "cut": "CHANGE_IN", "pick": "CHANGE_IN", "borrow": "CHANGE_IN",
-          "decrease": "REDUCTION", "leave": "REDUCTION", "spill": "REDUCTION", "lose": "REDUCTION",
-          "use": "REDUCTION", "spend": "REDUCTION", "saw": "REDUCTION", "eat": "REDUCTION",
-          "break": "REDUCTION", "more": "INCREASE", "build": "CHANGE_OUT", "taller": "INCREASE",
-          "load": "CHANGE_OUT", "increase": "INCREASE", "immigrate": "INCREASE", "find": "INCREASE"}
-'''
-
-
 
 
 # Step 1: Read questions from file
@@ -28,7 +14,8 @@ def main():
         questions = fi.readlines()
         # Step 2: Simplify the question by resolving conjunctions
 
-        word_problem = parser.parse("Rohan had 10 bananas . Harsha also picked up 7 from the store . Harsha ate 4 bananas . Janice found 7 bananas . Rohan sold 2 to Janice and 3 to Harsha . Janice bought 1 from Harsha . Harsha took 4 from Rohan . How many bananas does Harsha have now ?")
+        word_problem = parser.parse("Rohan had 10 bananas . Harsha also picked up 7 from the store . Harsha ate 4 bananas . "
+                                    "Janice found 7 bananas . Rohan sold 2 to Janice and 3 to Harsha . Janice bought 1 from Harsha . Harsha took 4 from Rohan . How many bananas do they have in total ?")
         print(word_problem)
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj = analyzer.extract(word_problem)
