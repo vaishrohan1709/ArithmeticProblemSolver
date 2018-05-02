@@ -94,5 +94,5 @@ def extract(word_problem):
                 verbs.append(sentence.split()[int(dependency[2] - 1)])
         nouns.append(owners)
     nlp.close()
-    return nouns, quantities, verbs, obj
+    return nouns, quantities, verbs, obj, word_problem
 

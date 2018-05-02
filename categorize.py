@@ -1,7 +1,7 @@
 from analyzer import Entity
 from nltk.stem.wordnet import WordNetLemmatizer
 
-#TODO "more than" (comparison) , multiple/divide, synonyms , some words can be both unary and binary
+#TODO "more than", multiple/divide, synonyms , some words can be both unary and binary
 
 #schema of verbs
 schema = {"find": ["Unary","Increase"], "increase": ["Unary","Increase"], "more": ["Unary","Increase"], "have": ["Unary","Increase"], "pick": ["Unary","Increase"],"add": ["Unary","Increase"] ,
