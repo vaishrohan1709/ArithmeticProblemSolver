@@ -40,8 +40,24 @@ def extract(word_problem):
         if tag.find("NNP") != -1:
             assumed_owner = word
             break
+    new_word_problem = ''
+    for sentence in word_problem:
+        for word in sentence.split():
+            tag = nlp.pos_tag(word)[0][1]
+            if tag.find("PRP") != -1:
+                new_word_problem += assumed_owner + ' '
+            else:
+                new_word_problem += word + ' '
+        new_word_problem += '. '
 
-    for sentence in word_problem[:-1]:
+    if new_word_problem != '':
+        new_word_problem = new_word_problem.rstrip(' .')
+        word_problem = new_word_problem
+    print(word_problem)
+
+
+    for sentence in word_problem.split(' . ')[:-1]:
+        print(sentence)
         owners = []
         parse = nlp.parse(sentence).encode('ascii', 'ignore')
         dependencies = nlp.dependency_parse(sentence)
@@ -77,6 +93,6 @@ def extract(word_problem):
             if tag.find('VB') != -1:
                 verbs.append(sentence.split()[int(dependency[2] - 1)])
         nouns.append(owners)
-
+    nlp.close()
     return nouns, quantities, verbs, obj
 

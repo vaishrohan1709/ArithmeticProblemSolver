@@ -68,9 +68,10 @@ def parse(question):
                 else:
                     resolved_right = p2.lstrip() + " " + v2 + " " + prp2
 
-                return_sentence = resolved_left + ". " + resolved_right
+                nlp.close()
+                return_sentence = return_sentence + " " + resolved_left + ". " + resolved_right
 
-            nlp.close()
+
         else:
             return_sentence = return_sentence + " " + sentence
 
