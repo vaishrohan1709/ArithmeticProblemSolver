@@ -1,11 +1,7 @@
 import parser
 import analyzer
 import categorize
-from stanfordcorenlp import StanfordCoreNLP
 from solver import solve
-import config
-
-
 
 # Step 1: Read questions from file
 def main():
