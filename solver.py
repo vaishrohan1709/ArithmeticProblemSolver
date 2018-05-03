@@ -40,6 +40,7 @@ def solve(word_problem,entities):
             break
 
         elif word in list_sum:
+            flag = 1
             sum = 0
             for entity in entities:
                 sum += entity.value
