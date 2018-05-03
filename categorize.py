@@ -4,7 +4,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 #TODO "more than", multiple/divide, synonyms , some words can be both unary and binary
 
 #schema of verbs
-schema = {"grow": ["Unary","Increase"], "find": ["Unary","Increase"], "increase": ["Unary","Increase"], "more": ["Unary","Increase"], "have": ["Unary","Increase"], "pick": ["Unary","Increase"],"add": ["Unary","Increase"] ,
+schema = {"be": ["Unary","Increase"], "grow": ["Unary","Increase"], "find": ["Unary","Increase"], "increase": ["Unary","Increase"], "more": ["Unary","Increase"], "have": ["Unary","Increase"], "pick": ["Unary","Increase"],"add": ["Unary","Increase"] ,
           "break": ["Unary","Decrease"], "eat": ["Unary","Decrease"], "spend": ["Unary", "Decrease"],"use": ["Unary","Decrease"], "lose": ["Unary","Decrease"], "spill": ["Unary","Decrease"],"leave": ["Unary","Decrease"], "decrease": ["Unary","Decrease"], "cut": ["Unary","Decrease"], "plant": ["Unary","Decrease"] , "place": ["Unary","Decrease"], "put": ["Unary", "Decrease"] ,"distribute": ["Unary","Decrease"],
           "give": ["Binary","LtoR"],  "transfer": ["Binary","LtoR"],"sell": ["Binary", "LtoR"] ,
           "get": ["Binary", "RtoL"] , "buy" : ["Binary", "RtoL"] , "take" : ["Binary", "RtoL"] , "borrow" : ["Binary", "RtoL"]}

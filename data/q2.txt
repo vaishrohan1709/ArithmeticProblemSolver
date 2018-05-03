@@ -1,7 +1,11 @@
-Joan found 70 seashells on the beach . she gave Sam some of her seashells . She has 27 seashell . How many seashells did she give to Sam ?
 Joan found 70 seashells on the beach . she gave 43 seashells to Sam . How many seashells does Sam have ?
 Benny has 4 apples . She gave 2 apples to Dany . How many apples does Benny have now ?
 Harsha has 10 bicycles . Janice bought 3 bicycles from Harsha . Harsha sold 4 bicycles to Rohan . How many bicycles does Harsha have ?
 John has 5 bananas . Mary has 10 bananas . Joe has 15 bananas . Who has the most number of bananas ?
 Mike has a height of 6.5 inches . Sam has a height of 5 inches . Who is shorter ?
 Sandy grew 6 carrots . Sam grew 3 carrots . How many carrots did they grow in total ?
+Sally had 10 bananas . Sally gave 2 to Keith . Keith also picked up 7 from the store . Keith ate 4 bananas . How many bananas does Keith have ?
+There are 1986 books in public library . There are 5106 books in school libraries . How many books do the libraries in Oak Grove have in all ?
+Christina had 500 dollars in her bank account . She transferred 150 dollars to her sister . How many dollars are now with Christina ?
+There are 250 students in CS department and 150 students in Physics department . What is the overall strength of the departments ?
+Drake has 5 pencils . Jenny has 10 pencils . Jim has 6 pencils . Who has the least number of pencils ?

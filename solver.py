@@ -4,7 +4,7 @@ import config
 
 list_positive = ["more","most","greater", "greatest" , "tall" , "taller" , "tallest"]
 list_negative = ["less","lesser","least" , "short" , "shorter" , "shortest"]
-list_sum = ["total", "together", "all" ]
+list_sum = ["total", "together", "all", "overall" ]
 
 def solve(word_problem,entities):
     answer_list=''
