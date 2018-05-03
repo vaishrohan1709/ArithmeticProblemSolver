@@ -63,11 +63,7 @@ def solve(word_problem,entities):
 
 
         for entity in entities:
-            print(question_owner)
             if entity.owner == question_owner:
-                print('true')
-                print(entity.owner)
-                print(entity.value)
                 answer_list+= str(entity.value)
         nlp.close()
         return answer_list

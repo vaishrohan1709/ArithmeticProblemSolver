@@ -53,7 +53,6 @@ def extract(word_problem):
     if new_word_problem != '':
         new_word_problem = new_word_problem.rstrip(' .')
         word_problem = new_word_problem
-    print(word_problem)
 
 
     for sentence in word_problem.split(' . ')[:-1]:

@@ -14,7 +14,7 @@ def main():
         questions = fi.readlines()
         # Step 2: Simplify the question by resolving conjunctions
 
-        word_problem = parser.parse(questions[2])
+        word_problem = parser.parse(questions[1])
         print(word_problem)
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj , word_problem = analyzer.extract(word_problem)

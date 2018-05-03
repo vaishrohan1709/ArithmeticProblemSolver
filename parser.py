@@ -4,6 +4,7 @@ import nltk
 
 
 def parse(question):
+    print('inside parser')
     # Resolve Conjunctions as noted in Sundaram, Khemani (2015)
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
@@ -19,6 +20,7 @@ def parse(question):
     verb_phrase2 = ''
     verb_phrase = ''
     for sentence in sentences:
+        print('sentence:', sentence)
         conj = ' '
         # Switch on specific conjunctions from dataset
         if 'if' in sentence.split():
