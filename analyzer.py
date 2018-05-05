@@ -56,7 +56,6 @@ def extract(word_problem):
 
 
     for sentence in word_problem.split(' . ')[:-1]:
-        print(sentence)
         owners = []
         parse = nlp.parse(sentence).encode('ascii', 'ignore')
         dependencies = nlp.dependency_parse(sentence)

@@ -20,19 +20,18 @@ def main():
             print 'Enter the question number from the list:'
             qno = input()
             word_problem = parser.parse(questions[qno])
-            print(type(questions[qno]))
         else:
             word_problem = raw_input("Enter the question: ")
             word_problem = parser.parse(word_problem)
 
-        print(word_problem)
+        print 'Question:',word_problem
+        print 'Processing......'
         # Step 3 : Extract entities from the question
         owners, quantities, verbs, obj , word_problem = analyzer.extract(word_problem)
         # Step 4: categorize questions based on verb and schema and perform computations
         entities = categorize.assign(owners, verbs, quantities)
 
         # Step 5: processing the question and answering it
-        answer_list = ''
         answer_list = solve(word_problem,entities)
         print(answer_list)
 

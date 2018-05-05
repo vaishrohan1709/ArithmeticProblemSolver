@@ -19,11 +19,9 @@ def solve(word_problem,entities):
         owner = ''
         if word in list_positive:
             flag = 1
-            print('positive ques')
             max = -100000
             for entity in entities:
                 if entity.value > max:
-                    print('iterating')
                     max = entity.value
                     owner = entity.owner
             answer_list += owner
