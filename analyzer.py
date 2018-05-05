@@ -66,7 +66,7 @@ def extract(word_problem):
         if parse.find("(VP (VBD ") != -1 or parse.find("(VP (VBN ") != -1:
             tense = "past"
         elif parse.find("(VP (VBP ") != -1 or parse.find("(VP (VBG ") != -1:
-            tense = "present"
+            tense = "present"git
         for dependency in dependencies:
             tag = nlp.pos_tag(sentence.split()[int(dependency[2] - 1)])[0][1]
             if tag.find("CD") != -1:

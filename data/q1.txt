@@ -14,7 +14,7 @@ A restaurant served 9 pizzas during lunch and 6 during dinner today . How many p
 There are 2 pencils in the drawer . Tim placed 3 pencils in the drawer . How many pencils are now there in total ?
 Joan found 6 seashells and Jessica found 8 seashells on the beach . How many seashells did they find together ?
 Sandy grew 6 carrots . Sam grew 3 carrots . How many carrots did they grow in total ?
-Benny picked 2 apples and Dan picked 9 apples from the apple tree . How many apples were picked in total ?
+Benny picked 2 apples and Dan picked 9 apples . How many apples were picked in total ?
 Sally found 9 seashells , Tom found 7 seashells , and Jessica found 5 seashells on the beach . How many seashells did they find together ?
 Tim 's cat had kittens . He gave 3 to Jessica and 6 to Sara . He now has 9 kittens . How many kittens did he have to start with ?
 Joan has 9 blue balloons , Sally has 5 blue balloons , and Jessica has 2 blue balloons . How many blue balloons do they have in total ?
