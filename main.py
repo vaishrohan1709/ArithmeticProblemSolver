@@ -70,7 +70,7 @@ appHighlightFont_Note = Font(family='Helvetica', size=12, weight='bold')
 qno = StringVar()
 question = StringVar()
 choice = StringVar()
-root.geometry('1400x1400+700+300')
+root.geometry('1200x1020')
 root.title('Arithmetic Word Problem Solver')
 
 # Load questions from file
