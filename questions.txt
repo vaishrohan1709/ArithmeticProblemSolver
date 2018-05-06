@@ -1,5 +1,5 @@
 Select a question number from this list first!
-
+Note: Questions 0-16 are solvable and 17-25 are not solvable according to our implementation.
 
 
 Question 0: Joan found 70 seashells on the beach . she gave 43 seashells to Sam . How many seashells does Sam have ?
