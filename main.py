@@ -67,9 +67,9 @@ def main():
         temptext = 'Select a question number from this list first!\n\n\n\n'
         for i, q in enumerate(questions):
             temptext += "Question " + str(i) + ": " + q + '\n'
-        file = open('questions.txt', "w")
+        file = open('questions1.txt', "w+")
         file.write(temptext)
-        open_file('questions.txt')
+        open_file('questions1.txt')
         #tkMessageBox.showinfo("Question List", temptext)
         # rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
         rlabel3 = Label(root, text='Enter the question number from the list:',  bg='#EFF493').pack()
