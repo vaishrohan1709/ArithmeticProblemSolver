@@ -10,7 +10,7 @@ def solve(word_problem,entities):
     answer_list=''
     question_owner = ''
     last_sentence = word_problem.split(" . ")[-1]
-    answer_list += last_sentence+" : "
+    answer_list += " Answer : "
     nlp = StanfordCoreNLP(config.path, memory='8g')
     dependencies = nlp.dependency_parse(last_sentence)
     flag = 0
