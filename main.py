@@ -93,6 +93,5 @@ with open('data/q2.txt', 'r') as fi:
     rlabel3 = Label(root, text='Do you want to select a question from the list (1) or enter your own (2)? Enter 1 / 2:', bg='#EFF493').pack()
     rentry = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
     rbutton = Button(root, text="Go", command=main, bg='black', fg='white' , borderwidth=5).pack()
-    #rbutton.grid(row=2, column=2, sticky=W)
 
 mainloop()
