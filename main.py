@@ -4,6 +4,7 @@ import categorize
 from solver import solve
 from Tkinter import *
 from tkFont import Font
+
 import tkSimpleDialog
 import tkMessageBox
 import sys
@@ -60,7 +61,16 @@ def main():
         rbutton2 = Button(root, text="Solve", command=quesEnter, bg='black', fg='white' , borderwidth=5).pack()
 
 #setting up the UI
+
+
+
 root = Tk()
+
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
+
+resolution = str(width) + "x" + str(height)
+print(resolution)
 
 root.configure(background='#EFF493')
 appHighlightFont_pos = Font(family='Helvetica', size=10)
@@ -70,7 +80,7 @@ appHighlightFont_Note = Font(family='Helvetica', size=12, weight='bold')
 qno = StringVar()
 question = StringVar()
 choice = StringVar()
-root.geometry('1200x1020')
+root.geometry(resolution)
 root.title('Arithmetic Word Problem Solver')
 
 # Load questions from file
