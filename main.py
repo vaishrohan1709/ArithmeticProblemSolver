@@ -4,6 +4,16 @@ import categorize
 from solver import solve
 from Tkinter import *
 from tkFont import Font
+import Tkinter as tk1
+import os, sys, subprocess
+
+def open_file(filename):
+    if sys.platform == "win32":
+        os.startfile(filename)
+    else:
+        opener ="open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, filename])
+
 
 import tkSimpleDialog
 import tkMessageBox
@@ -52,6 +62,16 @@ def quesEnter():
 def main():
     choice1 = int(choice.get())
     if choice1 == 1:
+
+
+        temptext = 'Select a question number from this list first!\n\n\n\n'
+        for i, q in enumerate(questions):
+            temptext += "Question " + str(i) + ": " + q + '\n'
+        file = open('questions.txt', "w")
+        file.write(temptext)
+        open_file('questions.txt')
+        #tkMessageBox.showinfo("Question List", temptext)
+        # rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
         rlabel3 = Label(root, text='Enter the question number from the list:',  bg='#EFF493').pack()
         rentry = Entry(root, textvariable=qno, bg='black', fg='white', width=20, justify=CENTER).pack()
         rbutton = Button(root, text="Solve", command=quesList, bg='black', fg='white' , borderwidth=5).pack()
@@ -65,7 +85,6 @@ def main():
 
 
 root = Tk()
-
 width = root.winfo_screenwidth()
 height = root.winfo_screenheight()
 
@@ -90,11 +109,6 @@ with open('data/q2.txt', 'r') as fi:
     questions = fi.readlines()
 
     rlabel = Label(root, text="CSE 537- Arithmetic Word Problem Solver (List of questions):" , fg='Blue', bg='#EFF493', font = appHighlightFont_Topic).pack()
-    temptext = ''
-    temptext1 = ''
-    for i, q in enumerate(questions):
-        temptext += "Question " + str(i) + ": " + q + '\n'
-    #rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
     rlabel2 = Label(root, text='Note: Questions 0-16 are solvable and 17-25 are not solvable according to our implementation.', bg='#EFF493', font=appHighlightFont_Note).pack()
     rlabel3 = Label(root, text='Do you want to select a question from the list (1) or enter your own (2)? Enter 1 / 2:', bg='#EFF493').pack()
     rentry3 = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
