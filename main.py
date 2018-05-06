@@ -80,7 +80,7 @@ appHighlightFont_Note = Font(family='Helvetica', size=12, weight='bold')
 qno = StringVar()
 question = StringVar()
 choice = StringVar()
-root.geometry(resolution)
+root.geometry('1366x768')
 root.title('Arithmetic Word Problem Solver')
 
 # Load questions from file
@@ -94,7 +94,7 @@ with open('data/q2.txt', 'r') as fi:
     temptext1 = ''
     for i, q in enumerate(questions):
         temptext += "Question " + str(i) + ": " + q + '\n'
-    rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
+    #rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
     rlabel2 = Label(root, text='Note: Questions 0-16 are solvable and 17-25 are not solvable according to our implementation.', bg='#EFF493', font=appHighlightFont_Note).pack()
     rlabel3 = Label(root, text='Do you want to select a question from the list (1) or enter your own (2)? Enter 1 / 2:', bg='#EFF493').pack()
     rentry3 = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
