@@ -11,6 +11,7 @@ import sys
 
 #ttk.Label(root, text='Attention!', font=appHighlightFont).grid()
 def quesList():
+
     quesno = int(qno.get())
 
     # Step 2: Simplify the question by resolving conjunctions
@@ -22,7 +23,7 @@ def quesList():
     # Step 4: categorize questions based on verb and schema and perform computations
     entities = categorize.assign(owners, verbs, quantities)
     # Step 5: processing the question and answering it
-    answer_list = solve(word_problem, entities)
+    answer_list = solve(word_problem, entities) + " (Please close this window and restart!)"
     rlabel5 = Label(root, text=answer_list, bg='#80ddff').pack()
     return
 
@@ -42,7 +43,7 @@ def quesEnter():
     entities = categorize.assign(owners, verbs, quantities)
 
     # Step 5: processing the question and answering it
-    answer_list = solve(word_problem, entities)
+    answer_list = solve(word_problem, entities) + " (Please close this window and restart!)"
     rlabel5 = Label(root, text=answer_list, bg='#80ddff').pack()
     return
 
@@ -55,8 +56,8 @@ def main():
         rbutton = Button(root, text="Solve", command=quesList, bg='black', fg='white' , borderwidth=5).pack()
     else:
         rlabel4 = Label(root, text='Enter the question: ',  bg='#EFF493').pack()
-        rentry = Entry(root, textvariable=question,  bg='black', fg='white', width=100, justify=CENTER).pack()
-        rbutton = Button(root, text="Solve", command=quesEnter, bg='black', fg='white' , borderwidth=5).pack()
+        rentry2 = Entry(root, textvariable=question,  bg='black', fg='white', width=100, justify=CENTER).pack()
+        rbutton2 = Button(root, text="Solve", command=quesEnter, bg='black', fg='white' , borderwidth=5).pack()
 
 #setting up the UI
 root = Tk()
@@ -82,16 +83,11 @@ with open('data/q2.txt', 'r') as fi:
     temptext = ''
     temptext1 = ''
     for i, q in enumerate(questions):
-        #if i < 17:
-            #temptext += "Question " + str(i) + ": " + q + '\n'
-        #else:
         temptext += "Question " + str(i) + ": " + q + '\n'
-    #rlabel1 = Label(root,text=temptext.rstrip('\n'), justify=LEFT, font=appHighlightFont_pos).pack()
     rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
-
     rlabel2 = Label(root, text='Note: Questions 0-16 are solvable and 17-25 are not solvable according to our implementation.', bg='#EFF493', font=appHighlightFont_Note).pack()
     rlabel3 = Label(root, text='Do you want to select a question from the list (1) or enter your own (2)? Enter 1 / 2:', bg='#EFF493').pack()
-    rentry = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
-    rbutton = Button(root, text="Go", command=main, bg='black', fg='white' , borderwidth=5).pack()
+    rentry3 = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
+    rbutton3 = Button(root, text="Go", command=main, bg='black', fg='white' , borderwidth=5).pack()
 
 mainloop()
