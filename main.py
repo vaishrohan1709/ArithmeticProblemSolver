@@ -15,16 +15,9 @@ def open_file(filename):
         subprocess.call([opener, filename])
 
 
-import tkSimpleDialog
-import tkMessageBox
-import sys
-
-
 #ttk.Label(root, text='Attention!', font=appHighlightFont).grid()
 def quesList():
-
     quesno = int(qno.get())
-
     # Step 2: Simplify the question by resolving conjunctions
     word_problem = parser.parse(questions[quesno])
     question_statement = 'Question: ' + questions[quesno]
@@ -41,7 +34,6 @@ def quesList():
 
 def quesEnter():
     question_text = question.get()
-
     # Step 2: Simplify the question by resolving conjunctions
     word_problem = parser.parse(question_text)
     print(word_problem)
@@ -52,7 +44,6 @@ def quesEnter():
     print(owners,quantities, verbs, obj , word_problem)
     # Step 4: categorize questions based on verb and schema and perform computations
     entities = categorize.assign(owners, verbs, quantities)
-
     # Step 5: processing the question and answering it
     answer_list = solve(word_problem, entities)
     rlabel5 = Label(root, text=answer_list, bg='#80ddff').pack()
@@ -63,11 +54,10 @@ def main():
     choice1 = int(choice.get())
     if choice1 == 1:
         temptext = 'Select a question number from this list first!\n\n\n\n'
+        # Load questions from file
         for i, q in enumerate(questions):
             temptext += "Question " + str(i) + ": " + q + '\n'
-        file = open('questions.txt', "r")
-        open_file('questions.txt')
-        #rlabel8 = Label(root, text=temptext.rstrip('\n'), justify=LEFT, bg='#EFF493',  borderwidth=5, relief="ridge", font=appHighlightFont_pos).pack()
+        open_file('data/questions.txt')
         rlabel3 = Label(root, text='\nEnter the question number from the list:',  bg='#EFF493').pack()
         rentry = Entry(root, textvariable=qno, bg='black', fg='white', width=20, justify=CENTER).pack()
         rbutton = Button(root, text="Solve", command=quesList, bg='black', fg='white' , borderwidth=5).pack()
@@ -76,10 +66,8 @@ def main():
         rentry2 = Entry(root, textvariable=question,  bg='black', fg='white', width=100, justify=CENTER).pack()
         rbutton2 = Button(root, text="Solve", command=quesEnter, bg='black', fg='white' , borderwidth=5).pack()
 
+
 #setting up the UI
-
-
-
 root = Tk()
 width = root.winfo_screenwidth()
 height = root.winfo_screenheight()
@@ -95,12 +83,10 @@ choice = StringVar()
 root.geometry(resolution)
 root.title('Arithmetic Word Problem Solver')
 
-# Load questions from file
-
+#opening dataset file
 with open('data/q2.txt', 'r') as fi:
     word_problem = ''
     questions = fi.readlines()
-
     rlabel = Label(root, text="CSE 537- Arithmetic Word Problem Solver (List of questions):" , fg='Blue', bg='#EFF493', font = appHighlightFont_Topic).pack()
     rlabel3 = Label(root, text='Do you want to select a question from a preset question list (1) or enter your own (2)? Enter (1 / 2):', bg='#EFF493').pack()
     rentry3 = Entry(root, textvariable=choice, bg='black', fg='white', width=20, justify=CENTER).pack()
@@ -108,5 +94,4 @@ with open('data/q2.txt', 'r') as fi:
     rlabel2 = Label(root,
                     text='Note: If you select option 1, a window with question list will appear. Please close that window after finalizing the question!\n If you want to solve more questions, keep entering your choice in the above text box subsequently!',
                     bg='#EFF493', font=appHighlightFont_Note).pack()
-
 mainloop()
